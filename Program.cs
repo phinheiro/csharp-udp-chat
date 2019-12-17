@@ -40,9 +40,12 @@ namespace ConsoleUdpChat
             listener.JoinMulticastGroup(_multicastAddress);
 
             Console.WriteLine("---CHAT---");
+            Console.WriteLine("Digite 'sair' para finalizar a aplicação...");
+            Console.WriteLine("Conectado ao servidor na porta: " + _endPoint.Port);
             while (true)
             {
                 byte[] data = listener.Receive(ref localEndPoint);
+
 
                 Console.WriteLine(localEndPoint + " --> " + Encoding.UTF8.GetString(data));
 
@@ -59,6 +62,8 @@ namespace ConsoleUdpChat
                 while (true)
                 {
                     controller.SendMessage(Console.ReadLine());
+                    if (Console.ReadLine().Contains("sair"))
+                        break;
                 }
             }
         }
